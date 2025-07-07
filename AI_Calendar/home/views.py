@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 import datetime
+from dateutil import tz
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -228,11 +229,15 @@ def ai_process_query(request):
 
     #if not SocialToken.objects.filter(account__user=user, account__provider='google').exists():
         #return JsonResponse({"error": "Only Google-authenticated users can use this feature."}, status=403)
-
+    now = datetime.datetime.now(tz=tz.gettz("America/New_York")).isoformat()
+    weekday = datetime.datetime.now(tz=tz.gettz("America/New_York")).strftime("%A")
+    
     query = request.POST.get("query", "").strip()
     query += (
-    ' Return recurrence rule like: "RRULE:FREQ=WEEKLY;BYDAY=MO,WE;UNTIL=20241201T235959Z". '
-    ' If no recurrence, return the event as-is without the recurrence field. '
+    f'. Today is {now}, {weekday}'
+    f'. If no recurrence, return the event as-is without the recurrence field '
+    f'. If there is recurrence, return recurrence rule like: "RRULE:FREQ=WEEKLY;BYDAY=MO,WE;UNTIL=20241201T235959Z"'
+    f'. Return all times in yyyy-mm-ddThh:mm:ss format.'
     )
     
     uploaded_file = request.FILES.get("file")
