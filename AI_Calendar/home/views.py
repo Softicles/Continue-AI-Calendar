@@ -233,9 +233,10 @@ def ai_process_query(request):
     weekday = datetime.datetime.now(tz=tz.gettz("America/New_York")).strftime("%A")
     
     query = request.POST.get("query", "").strip()
-    query += (
+    additional_query = (
+    f'. These are the universal rules for events generated'
     f'. Today is {now}, {weekday}'
-    f'. If no recurrence, return the event as-is without the recurrence field '
+    f'. If no recurrence, return the events as-is without the recurrence field '
     f'. If there is recurrence, return recurrence rule like: "RRULE:FREQ=WEEKLY;BYDAY=MO,WE;UNTIL=20241201T235959Z"'
     f'. Return all times in yyyy-mm-ddThh:mm:ss format.'
     )
@@ -271,7 +272,7 @@ def ai_process_query(request):
 
         try:
             extractor = EventExtraction()
-            instruction = query if query else None
+            instruction = (query if query else "") + additional_query
             events = extractor.extract(instruction, extracted_text)
 
             normalized = []
@@ -360,65 +361,65 @@ def poll_llm_status(request):
         "suggested_events": request.session.get("event_suggestions", [])
     })
     
-@csrf_exempt
-@require_POST
-def guest_ai_query(request):
-    print("📩 Guest AI Query triggered")
+# @csrf_exempt
+# @require_POST
+# def guest_ai_query(request):
+#     print("📩 Guest AI Query triggered")
 
-    query = request.POST.get("query", "").strip()
-    uploaded_file = request.FILES.get("file")
-    extracted_text = ""
+#     query = request.POST.get("query", "").strip()
+#     uploaded_file = request.FILES.get("file")
+#     extracted_text = ""
 
-    if not query and not uploaded_file:
-        return JsonResponse({"error": "Query or file required."}, status=400)
+#     if not query and not uploaded_file:
+#         return JsonResponse({"error": "Query or file required."}, status=400)
 
-    # Extract text from PDF file if present
-    if uploaded_file and uploaded_file.name.endswith('.pdf'):
-        try:
-            pdf_reader = PyPDF2.PdfReader(BytesIO(uploaded_file.read()))
-            for page in pdf_reader.pages:
-                text = page.extract_text()
-                if text:
-                    extracted_text += text
-        except Exception as e:
-            print("PDF read error:", e)
-            return JsonResponse({"error": f"PDF read error: {str(e)}"}, status=400)
+#     # Extract text from PDF file if present
+#     if uploaded_file and uploaded_file.name.endswith('.pdf'):
+#         try:
+#             pdf_reader = PyPDF2.PdfReader(BytesIO(uploaded_file.read()))
+#             for page in pdf_reader.pages:
+#                 text = page.extract_text()
+#                 if text:
+#                     extracted_text += text
+#         except Exception as e:
+#             print("PDF read error:", e)
+#             return JsonResponse({"error": f"PDF read error: {str(e)}"}, status=400)
 
-    try:
-        from home.llm.event_llm import EventExtraction
-        extractor = EventExtraction()
+#     try:
+#         from home.llm.event_llm import EventExtraction
+#         extractor = EventExtraction()
 
-        instruction = query if query else None
-        print(f"Extracting events with query='{instruction}' and PDF content length={len(extracted_text)}")
-        events = extractor.extract(instruction, extracted_text)
+#         instruction = query if query else None
+#         print(f"Extracting events with query='{instruction}' and PDF content length={len(extracted_text)}")
+#         events = extractor.extract(instruction, extracted_text)
 
-        if not isinstance(events, list):
-            raise ValueError("LLM did not return a list of events")
+#         if not isinstance(events, list):
+#             raise ValueError("LLM did not return a list of events")
 
-        normalized = []
-        for ev in events:
-            normalized.append({
-                "title": ev.get("title", "Untitled"),
-                "start": ev.get("start", ""),
-                "end": ev.get("end", ""),
-                "location": ev.get("location", ""),
-                "description": ev.get("description", ""),
-                "recurrence": ev.get("recurrence", ""),
-                "backgroundColor": "#3788d8",
-                "calendarId": "primary",
-                "extendedProps": {
-                    "location": ev.get("location", ""),
-                    "description": ev.get("description", ""),
-                    "creator": "",
-                    "htmlLink": "",
-                    "googleEventId": ""
-                }
-            })
+#         normalized = []
+#         for ev in events:
+#             normalized.append({
+#                 "title": ev.get("title", "Untitled"),
+#                 "start": ev.get("start", ""),
+#                 "end": ev.get("end", ""),
+#                 "location": ev.get("location", ""),
+#                 "description": ev.get("description", ""),
+#                 "recurrence": ev.get("recurrence", ""),
+#                 "backgroundColor": "#3788d8",
+#                 "calendarId": "primary",
+#                 "extendedProps": {
+#                     "location": ev.get("location", ""),
+#                     "description": ev.get("description", ""),
+#                     "creator": "",
+#                     "htmlLink": "",
+#                     "googleEventId": ""
+#                 }
+#             })
 
-        print(f"{len(normalized)} events extracted.")
-        request.session.modified = True
-        return JsonResponse({"events": normalized})
+#         print(f"{len(normalized)} events extracted.")
+#         request.session.modified = True
+#         return JsonResponse({"events": normalized})
 
-    except Exception as e:
-        print("Guest LLM extraction failed:", e)
-        return JsonResponse({"error": str(e)}, status=500)
+#     except Exception as e:
+#         print("Guest LLM extraction failed:", e)
+#         return JsonResponse({"error": str(e)}, status=500)
