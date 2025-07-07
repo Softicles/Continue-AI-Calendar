@@ -11,3 +11,6 @@ This project was originally my idea for the final project for the class **CS 234
 ## Continued Development
 
 While the course project concluded at the end of the semester, I chose to independently continue developing AI Calendar beyond the class.
+
+## How to use this repository
+
