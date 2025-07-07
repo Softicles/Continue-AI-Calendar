@@ -6,7 +6,7 @@
 
 ## Origin
 
-This project was originally my idea for the final project as part of the course **CS 2340 - Objects and Design (Spring 2025)** at **Georgia Tech**.
+This project was originally my idea for the final project in the class **CS 2340 - Objects and Design (Spring 2025)** at **Georgia Tech**.
 
 ## Continued Development
 
