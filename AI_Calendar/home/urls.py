@@ -14,6 +14,6 @@ urlpatterns = [
     # path('plus/', views.plus, name='home.plus'),
     # path('contact/', views.contact, name='home.contact'),
     # path('tutorial/', views.tutorial, name='home.tutorial'),
-    path('guest-ai-query/', views.guest_ai_query, name='guest_ai_query'),
+    # path('guest-ai-query/', views.guest_ai_query, name='guest_ai_query'),
 
 ]
