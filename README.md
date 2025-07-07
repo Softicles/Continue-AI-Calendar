@@ -6,8 +6,8 @@
 
 ## Origin
 
-This project was originally developed as part of the course **CS 2340 - Objects and Design (Spring 2025)** at **Georgia Tech**.
+This project was originally my idea for the final project as part of the course **CS 2340 - Objects and Design (Spring 2025)** at **Georgia Tech**.
 
 ## Continued Development
 
-While the course project concluded at the end of the semester, I chose to **independently continue developing AI Calendar** beyond the class.
+While the course project concluded at the end of the semester, I chose to independently continue developing AI Calendar beyond the class.
