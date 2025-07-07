@@ -2,7 +2,7 @@
 
 ## Overview
 
-**AI Calendar** is a smart assistant that automatically **extracts events from PDF documents** and seamlessly imports them into **Google Calendar**. This project aims to streamline scheduling by using AI to detect dates, times, and descriptions from structured or semi-structured files like syllabi, itineraries, and event brochures.
+**AI Calendar** is a smart assistant that automatically extracts events from PDF documents and seamlessly imports them into **Google Calendar**. This project aims to streamline scheduling by using AI to detect dates, times, and descriptions from structured or semi-structured files like syllabi, itineraries, and event brochures.
 
 ## Origin
 
