@@ -6,10 +6,8 @@
 
 ## Origin
 
-This project was originally developed as part of the course **CS 2340 - Objects and Design (Spring 2025)** at **Georgia Tech**. The initial phase of the project was a collaborative effort documented in the team's repository:
-
-> _Team Repository: [Insert repository link here]_
+This project was originally developed as part of the course **CS 2340 - Objects and Design (Spring 2025)** at **Georgia Tech**.
 
 ## Continued Development
 
-While the course project concluded at the end of the semester, I chose to **independently continue developing AI Calendar** beyond the class to reach a fully functional, user-friendly product. The current version represents several iterations of design, feature enhancements, and integration with the Google Calendar API.
+While the course project concluded at the end of the semester, I chose to **independently continue developing AI Calendar** beyond the class.
