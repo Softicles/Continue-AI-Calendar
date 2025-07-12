@@ -2,15 +2,16 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Home | GT AI Calendar{% endblock title %}
+{% block title %}Home | AI Calendar{% endblock title %}
 
 {% block extra_css %}
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'styles.css' %}" />
 {% endblock %}
 
 {% block content %}
 <div class="container mt-5 text-center">
-    <h1>Welcome to GT AI Calendar</h1>
+    <h1>Welcome to AI Calendar</h1>
     <p>Your AI-powered scheduling assistant</p>
 </div>
 <div class="container mt-3">
@@ -24,7 +25,7 @@
 <div class="container mt-5">
     <div class="row">
         <!-- Calendar Selector -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             {% if user.is_authenticated and calendars %}
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
@@ -117,7 +118,7 @@
 
         <!-- Calendar View -->
         {% if user.is_authenticated and calendars %}
-        <div class="{% if user.is_authenticated and calendars %}col-md-8{% else %}col-12{% endif %}">
+        <div class="{% if user.is_authenticated and calendars %}col-md-9{% else %}col-12{% endif %}">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">My Schedule</h5>
@@ -184,6 +185,7 @@
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
 <script>
     function getCookie(name) {
         let cookieValue = null;
@@ -296,12 +298,12 @@
     
         if (calendarEl) {
             calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
+                initialView: 'timeGridWeek',
                 height: 'auto',
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                    right: 'timeGridWeek,dayGridMonth,listWeek'
                 },
                 events: allEvents,
                 eventClick: function (info) {
@@ -425,7 +427,7 @@
                 
                     const untilDate = document.getElementById("manual-until").value;
                     if (untilDate) {
-                        const until = new Date(untilDate + "T23:59:59Z").toISOString().replace(/[-:]/g, "").split(".")[0];
+                        const until = new Date(untilDate + "T23:59:59Z").toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
                         rrule += `;UNTIL=${until}`;
                     }
                 

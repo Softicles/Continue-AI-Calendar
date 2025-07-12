@@ -2,13 +2,14 @@ import os
 from openai import OpenAI
 from datetime import datetime
 from dateutil import tz
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from pydantic import BaseModel
 from pypdf import PdfReader
 
 
-load_dotenv()
-
+dotenv_path = find_dotenv()
+print(f"🔍 Loading .env from: {dotenv_path}")
+load_dotenv(dotenv_path)
 
 # Class that describes the variables of a calender event
 class Event(BaseModel):
@@ -91,8 +92,6 @@ class APICaller:
         )
 
         return completion.choices[0].message.parsed
-    
-    
 
 class ExtractInfo:
     @staticmethod
