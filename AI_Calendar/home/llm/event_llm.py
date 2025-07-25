@@ -48,10 +48,6 @@ class EventLocationWrapper(BaseModel):
 class EventDescriptionWrapper(BaseModel):
     events: list[EventDescription]
 
-# class EventRecurrenceWrapper(BaseModel):
-#     events: list[EventRecurrence]
-
-
 class APICaller:
     def __init__(self):
         api_key = os.getenv("OPENAI_API_KEY")
