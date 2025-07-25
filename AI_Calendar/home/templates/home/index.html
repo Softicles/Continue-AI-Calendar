@@ -13,14 +13,14 @@
 <div class="container mt-5 text-center">
     <h1>Welcome to AI Calendar</h1>
     <p>Your AI-powered scheduling assistant</p>
-</div>
-<div class="container mt-3">
+</div> 
+{% comment %} <div class="container mt-3">
     <details>
         <summary class="text-muted">Debug Info (click to expand)</summary>
         <pre>{{ events|safe }}</pre>
         <pre>{{ calendars|safe }}</pre>
     </details>
-</div>
+</div> {% endcomment %}
 
 <div class="container mt-5">
     <div class="row">
@@ -147,37 +147,33 @@
         </div>
     </div>
     {% endif %}
+
     {% if not user.is_authenticated %}
-    <!-- Guest user form -->
-    {% comment %} <div class="card mt-4 shadow-sm">
-        <div class="card-body">
-            <form id="guest-ai-form">
-                <div class="mb-3">
-                    <label for="guest-ai-input" class="form-label">AI Calendar Trial (Guest):</label>
-                    <textarea id="guest-ai-input" class="form-control form-control-sm" rows="3"
-                        placeholder="e.g., Study session next Friday..."></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="guest-ai-file" class="form-label">Optional PDF Upload</label>
-                    <input type="file" class="form-control form-control-sm" id="guest-ai-file" name="file">
-                </div>
-                <button type="submit" class="btn btn-sm btn-primary w-100">Submit Trial</button>
-            </form>
-            <div id="guest-ai-response" class="mt-2 d-none alert alert-info"></div>
+    {% comment %} Home page {% endcomment %}
+    <div class="container my-5" data-aos="fade-up" data-aos-delay="300">
+        <div class="row align-items">
+            <!-- Image on the left -->
+            <div class="col-md-6 text-center">
+                <img
+                    src="{% static 'image/background.jpg' %}"
+                    class="img-fluid rounded shadow"
+                    alt="illustration"
+                    style="max-width: 100%; height: auto;"
+                />
+            </div>
+
+            <!-- Text on the right -->
+            <div class="col-md-6">
+                <p style="font-size: 1.2rem;">
+                    <strong>AI Calendar</strong> makes managing your schedule smarter and easier. We will make your Google Calendar better!
+                </p>
+                <p style="font-size: 1.2rem;">
+                    Just give us something such as a Syllabus, or simply just input some texts, and we will make it appear on your calendar. No more manually entering each detail.
+                </p>
+            </div>
         </div>
-    </div>
-    <table id="guest-ai-table" class="table table-sm table-striped d-none mt-3">
-        <thead class="table-light">
-            <tr>
-                <th>Title</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Location</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table> {% endcomment %}
+    </div>  
+
     {% endif %}
 
     </div>
