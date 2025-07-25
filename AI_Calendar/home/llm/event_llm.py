@@ -8,7 +8,7 @@ from pypdf import PdfReader
 
 
 dotenv_path = find_dotenv()
-print(f"🔍 Loading .env from: {dotenv_path}")
+print(f"Loading .env from: {dotenv_path}")
 load_dotenv(dotenv_path)
 
 # Class that describes the variables of a calender event

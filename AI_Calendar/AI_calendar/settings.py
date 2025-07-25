@@ -14,7 +14,9 @@ from pathlib import Path
 import os
 from decouple import config
 import logging
+from dotenv import load_dotenv
 
+load_dotenv()
 logging.basicConfig(level=logging.DEBUG)
 
 LOGGING = {
@@ -34,8 +36,8 @@ LOGGING = {
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 
-GOOGLE_CLIENT_ID = config("GOOGLE_CLIENT_ID")
-GOOGLE_CLIENT_SECRET = config("GOOGLE_CLIENT_SECRET")
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -46,7 +48,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-3ih^76i&kny#+ay*(hwu(%_jjn2==80fo%1n+b-l@+1cq&4%(&"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
