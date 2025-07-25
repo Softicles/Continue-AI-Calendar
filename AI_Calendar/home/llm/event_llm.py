@@ -34,13 +34,6 @@ class EventDescription(BaseModel):
     end: str
     location: str
     description: str
-    
-# class EventRecurrence(BaseModel):
-#     start: str
-#     end: str
-#     location: str
-#     description: str
-#     recurrence: str
 
 # Root object schema
 class EventWrapper(BaseModel):
