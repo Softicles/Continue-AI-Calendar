@@ -146,22 +146,6 @@ class ExtractInfo:
 
         return result
     
-    # @staticmethod
-    # def get_recurrence(text: str, event_str: str, api_caller: APICaller) -> EventRecurrence:
-    #     now = datetime.now(tz=tz.gettz("America/New_York")).isoformat()
-    #     weekday = datetime.now(tz=tz.gettz("America/New_York")).strftime("%A")
-
-    #     instruction = (
-    #         f"Add recurrence information to the following event:\n{event_str} \nToday is {now}, {weekday}. "
-    #         "Return structured JSON as: {\"start\": ... , \"end\": ... , \"location\": ... , \"description\": ... , \"recurrence\": ...}. "
-    #         "Return all times in yyyy-mm-ddThh:mm:ss format."
-    #         "If recurrence information cannot be found, return an empty string for the \"description\" field."
-    #     )
-
-    #     result = api_caller.get_events(instruction, text, EventDescription)
-
-    #     return result
-    
     @staticmethod
     def get_title(text: str, event_str: str, api_caller: APICaller) -> Event:
         now = datetime.now(tz=tz.gettz("America/New_York")).isoformat()

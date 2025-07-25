@@ -34,28 +34,6 @@
                             <a class="nav-link text-dark" href="{% url url_name %}">{{ name }}</a>
                         </li>
                     {% endfor %}
-
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link text-primary" href="{% url 'home.index' %}">Home</a>
-                    </li> {% endcomment %}
-
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link text-primary" href="{% url 'home.tutorial' %}">Tutorial</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-primary" href="{% url 'home.about' %}">About</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-primary" href="{% url 'home.contact' %}">Contact Us</a>
-                    </li>
-
-                    <li class="nav-item ms-2">
-                        <a class="btn btn-primary px-3" href="{% url 'home.plus' %}">
-                            <i class="fa-solid fa-star me-1"></i> Upgrade to Plus
-                        </a>
-                    </li> {% endcomment %}
                     
                     <div class="vr bg-secondary mx-2 d-none d-lg-block"></div>
                     {% if user.is_authenticated %}
@@ -106,11 +84,12 @@
     {% block extra_js %}{% endblock %}
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 1000, // Animation duration in milliseconds
-    once: true,     // Only animate once per scroll
-  });
-</script>
+
+    <script>
+        AOS.init({
+            duration: 1000, // Animation duration in milliseconds
+            once: true,     // Only animate once per scroll
+        });
+    </script>
 </body>
 </html>
