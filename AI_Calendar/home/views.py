@@ -199,26 +199,6 @@ def index(request):
         'chat_history': request.session.get("chat_history", [])
     })
 
-# def about(request):
-#     template_data = {}
-#     template_data['title'] = 'About'
-#     return render(request, 'home/about.html', {'template_data': template_data})
-
-# def plus(request):
-#     template_data = {}
-#     template_data['title'] = 'Plus'
-#     return render(request, 'home/plus.html', {'template_data': template_data})
-
-# def contact(request):
-#     template_data = {}
-#     template_data['title'] = 'Contact'
-#     return render(request, 'home/contact.html', {'template_data' : template_data})
-
-# def tutorial(request):
-#     template_data = {}
-#     template_data['title'] = 'Tutorial'
-#     return render(request, 'home/tutorial.html', {'template_data' : template_data})    
-
 @csrf_exempt
 @require_POST
 def ai_process_query(request):
@@ -360,66 +340,3 @@ def poll_llm_status(request):
         "processing": request.session.get("llm_processing", False),
         "suggested_events": request.session.get("event_suggestions", [])
     })
-    
-# @csrf_exempt
-# @require_POST
-# def guest_ai_query(request):
-#     print("📩 Guest AI Query triggered")
-
-#     query = request.POST.get("query", "").strip()
-#     uploaded_file = request.FILES.get("file")
-#     extracted_text = ""
-
-#     if not query and not uploaded_file:
-#         return JsonResponse({"error": "Query or file required."}, status=400)
-
-#     # Extract text from PDF file if present
-#     if uploaded_file and uploaded_file.name.endswith('.pdf'):
-#         try:
-#             pdf_reader = PyPDF2.PdfReader(BytesIO(uploaded_file.read()))
-#             for page in pdf_reader.pages:
-#                 text = page.extract_text()
-#                 if text:
-#                     extracted_text += text
-#         except Exception as e:
-#             print("PDF read error:", e)
-#             return JsonResponse({"error": f"PDF read error: {str(e)}"}, status=400)
-
-#     try:
-#         from home.llm.event_llm import EventExtraction
-#         extractor = EventExtraction()
-
-#         instruction = query if query else None
-#         print(f"Extracting events with query='{instruction}' and PDF content length={len(extracted_text)}")
-#         events = extractor.extract(instruction, extracted_text)
-
-#         if not isinstance(events, list):
-#             raise ValueError("LLM did not return a list of events")
-
-#         normalized = []
-#         for ev in events:
-#             normalized.append({
-#                 "title": ev.get("title", "Untitled"),
-#                 "start": ev.get("start", ""),
-#                 "end": ev.get("end", ""),
-#                 "location": ev.get("location", ""),
-#                 "description": ev.get("description", ""),
-#                 "recurrence": ev.get("recurrence", ""),
-#                 "backgroundColor": "#3788d8",
-#                 "calendarId": "primary",
-#                 "extendedProps": {
-#                     "location": ev.get("location", ""),
-#                     "description": ev.get("description", ""),
-#                     "creator": "",
-#                     "htmlLink": "",
-#                     "googleEventId": ""
-#                 }
-#             })
-
-#         print(f"{len(normalized)} events extracted.")
-#         request.session.modified = True
-#         return JsonResponse({"events": normalized})
-
-#     except Exception as e:
-#         print("Guest LLM extraction failed:", e)
-#         return JsonResponse({"error": str(e)}, status=500)
