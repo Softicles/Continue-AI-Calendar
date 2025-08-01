@@ -1,10 +1,16 @@
 {% extends "base.html" %} {% load i18n %} {% load account %} {% block title%}
 Sign In via {{ provider.name }}{% endblock %} {% block content %}
-<div class="container text-center mt-5">
+<div class="container text-start mt-5">
     <h2 class="mb-4">Sign In with Google</h2>
     <p class="text-muted mb-4">
-        You're about to sign in using your Google account.
+        You're about to sign in. Unfortunately, the application is not available
+        to the public yet. However, you can still access all the application's
+        functionalities using the google account that we provide!
     </p>
+
+    </p>
+    <p class="text-muted mb-1"><strong>Account:</strong> aicalendar415@gmail.com</p>
+    <p class="text-muted mb-4"><strong>Password:</strong> ai_calendar415!</p>
 
     <form method="post" action="">
         {% csrf_token %}
