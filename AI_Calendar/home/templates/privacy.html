@@ -1,23 +1,14 @@
-<!-- templates/privacy.html -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Privacy Policy</title>
-    </head>
-    <body>
-        <h1>Privacy Policy</h1>
-        <p>
-            This AI Calendar app uses your Google account information solely to
-            provide calendar features. We access your calendar data to read,
-            create, and manage events based on your input.
-        </p>
-        <p>
-            Your data is not shared with third parties. We use Google's OAuth
-            2.0 for secure authentication.
-        </p>
-        <p>
-            You may revoke access at any time through your Google account
-            settings.
-        </p>
-    </body>
-</html>
+{% extends 'base.html' %} {% block title %} Privacy Policy {% endblock title %}
+{% block content %}
+<h1 class="mb-4">Privacy Policy</h1>
+<p>
+    This AI Calendar app uses your Google account information solely help you be
+    more efficient with Google Calendar. We access your calendar data to read,
+    manage events, and create them based on your input.
+</p>
+<p>
+    Your data is not shared with third parties. We use Google's OAuth 2.0 for
+    secure authentication.
+</p>
+<p>You can revoke access at any time through your Google account settings.</p>
+{% endblock content %}
