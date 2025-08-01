@@ -1,26 +1,24 @@
-{% extends "base.html" %}
-{% load static %}
-{% load i18n %}
-
-{% block title %}Home | AI Calendar{% endblock title %}
-
-{% block extra_css %}
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+{% extends "base.html" %} {% load static %} {% load i18n %} {% block title
+%}Home | AI Calendar{% endblock title %} {% block extra_css %}
+<link
+    href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css"
+    rel="stylesheet"
+/>
 <link rel="stylesheet" href="{% static 'styles.css' %}" />
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="container mt-5 text-center">
     <h1>Welcome to AI Calendar</h1>
     <p>Your AI-powered scheduling assistant</p>
-</div> 
-{% comment %} <div class="container mt-3">
+</div>
+{% comment %}
+<div class="container mt-3">
     <details>
         <summary class="text-muted">Debug Info (click to expand)</summary>
         <pre>{{ events|safe }}</pre>
         <pre>{{ calendars|safe }}</pre>
     </details>
-</div> {% endcomment %}
+</div>
+{% endcomment %}
 
 <div class="container mt-5">
     <div class="row">
@@ -35,28 +33,61 @@
                     <form id="calendar-form">
                         {% for cal in calendars %}
                         <div class="form-check">
-                            <input class="form-check-input calendar-toggle" type="checkbox" name="calendars"
-                                value="{{ cal.id }}" checked>
-                            <label class="form-check-label">{{ cal.name }}</label>
+                            <input
+                                class="form-check-input calendar-toggle"
+                                type="checkbox"
+                                name="calendars"
+                                value="{{ cal.id }}"
+                                checked
+                            />
+                            <label class="form-check-label"
+                                >{{ cal.name }}</label
+                            >
                         </div>
                         {% endfor %}
                     </form>
 
-                    <button id="add-event-toggle" class="btn btn-outline-primary btn-sm mt-3 w-100">+ Add Event</button>
-                    <form id="manual-event-form" class="border p-3 rounded shadow-sm bg-light d-none">
+                    <button
+                        id="add-event-toggle"
+                        class="btn btn-outline-primary btn-sm mt-3 w-100"
+                    >
+                        + Add Event
+                    </button>
+                    <form
+                        id="manual-event-form"
+                        class="border p-3 rounded shadow-sm bg-light d-none"
+                    >
                         <div class="mb-2">
-                            <input type="text" class="form-control form-control-sm" placeholder="Title" id="manual-title"
-                                required>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                placeholder="Title"
+                                id="manual-title"
+                                required
+                            />
                         </div>
                         <div class="mb-2">
-                            <input type="datetime-local" class="form-control form-control-sm" id="manual-start" required>
+                            <input
+                                type="datetime-local"
+                                class="form-control form-control-sm"
+                                id="manual-start"
+                                required
+                            />
                         </div>
                         <div class="mb-2">
-                            <input type="datetime-local" class="form-control form-control-sm" id="manual-end" required>
+                            <input
+                                type="datetime-local"
+                                class="form-control form-control-sm"
+                                id="manual-end"
+                                required
+                            />
                         </div>
                         <div class="mb-2">
                             <label>Repeat:</label>
-                            <select class="form-select form-select-sm" id="manual-repeat">
+                            <select
+                                class="form-select form-select-sm"
+                                id="manual-repeat"
+                            >
                                 <option value="">None</option>
                                 <option value="DAILY">Daily</option>
                                 <option value="WEEKLY">Weekly</option>
@@ -67,58 +98,118 @@
                         <div class="mb-2 d-none" id="manual-weekly-options">
                             <label>Repeat on:</label>
                             <div class="d-flex flex-wrap gap-2">
-                                <label><input type="checkbox" value="MO"> Mon</label>
-                                <label><input type="checkbox" value="TU"> Tue</label>
-                                <label><input type="checkbox" value="WE"> Wed</label>
-                                <label><input type="checkbox" value="TH"> Thu</label>
-                                <label><input type="checkbox" value="FR"> Fri</label>
-                                <label><input type="checkbox" value="SA"> Sat</label>
-                                <label><input type="checkbox" value="SU"> Sun</label>
+                                <label
+                                    ><input type="checkbox" value="MO" />
+                                    Mon</label
+                                >
+                                <label
+                                    ><input type="checkbox" value="TU" />
+                                    Tue</label
+                                >
+                                <label
+                                    ><input type="checkbox" value="WE" />
+                                    Wed</label
+                                >
+                                <label
+                                    ><input type="checkbox" value="TH" />
+                                    Thu</label
+                                >
+                                <label
+                                    ><input type="checkbox" value="FR" />
+                                    Fri</label
+                                >
+                                <label
+                                    ><input type="checkbox" value="SA" />
+                                    Sat</label
+                                >
+                                <label
+                                    ><input type="checkbox" value="SU" />
+                                    Sun</label
+                                >
                             </div>
                         </div>
 
                         <div class="mb-2 d-none" id="manual-until-group">
                             <label>Until (end date):</label>
-                            <input type="date" class="form-control form-control-sm" id="manual-until">
+                            <input
+                                type="date"
+                                class="form-control form-control-sm"
+                                id="manual-until"
+                            />
                         </div>
 
                         <div class="mb-2">
-                            <input type="text" class="form-control form-control-sm" placeholder="Location"
-                                id="manual-location">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                placeholder="Location"
+                                id="manual-location"
+                            />
                         </div>
                         <div class="mb-2">
-                            <input type="text" class="form-control form-control-sm" placeholder="Description"
-                                id="manual-description">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                placeholder="Description"
+                                id="manual-description"
+                            />
                         </div>
-                        <button type="submit" class="btn btn-sm btn-success w-100">Save</button>
+                        <button
+                            type="submit"
+                            class="btn btn-sm btn-success w-100"
+                        >
+                            Save
+                        </button>
                     </form>
                     <!-- AI Calendar Query Form -->
                     <div class="card mt-4 shadow-sm">
                         <div class="card-body">
                             <form id="ai-query-form">
                                 <div class="mb-3">
-                                    <label for="ai-input" class="form-label">AI Calendar Query:</label>
-                                    <textarea id="ai-input" class="form-control form-control-sm" rows="3"
-                                        placeholder="e.g., Meeting next Tuesday..."></textarea>
+                                    <label for="ai-input" class="form-label"
+                                        >AI Calendar Query:</label
+                                    >
+                                    <textarea
+                                        id="ai-input"
+                                        class="form-control form-control-sm"
+                                        rows="3"
+                                        placeholder="e.g., Meeting next Tuesday..."
+                                    ></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ai-file" class="form-label">PDF Upload</label>
-                                    <input type="file" class="form-control form-control-sm" id="ai-file" name="file">
+                                    <label for="ai-file" class="form-label"
+                                        >PDF Upload</label
+                                    >
+                                    <input
+                                        type="file"
+                                        class="form-control form-control-sm"
+                                        id="ai-file"
+                                        name="file"
+                                    />
                                 </div>
-                                <button type="submit" class="btn btn-sm btn-primary w-100">Submit Query</button>
+                                <button
+                                    type="submit"
+                                    class="btn btn-sm btn-primary w-100"
+                                >
+                                    Submit Query
+                                </button>
                             </form>
-                            <div id="ai-response" class="mt-2 d-none alert alert-secondary"></div>
+                            <div
+                                id="ai-response"
+                                class="mt-2 d-none alert alert-secondary"
+                            ></div>
                         </div>
                     </div>
                 </div>
             </div>
             {% endif %}
         </div>
-        
 
         <!-- Calendar View -->
         {% if user.is_authenticated and calendars %}
-        <div class="{% if user.is_authenticated and calendars %}col-md-9{% else %}col-12{% endif %}">
+        <div
+            class="{% if user.is_authenticated and calendars %}col-md-9{% else %}col-12{% endif %}"
+        >
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">My Schedule</h5>
@@ -128,573 +219,575 @@
                 </div>
             </div>
         </div>
+        {% endif %} {% if user.is_authenticated %}
+        <!-- Chat History and Suggested Events -->
+        <div class="card mt-4 shadow-sm" id="chat-container">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Chat History</h5>
+            </div>
+            <div class="card-body">
+                <div id="chat-history" class="mb-3">
+                    <!-- Session queries and file summaries go here -->
+                </div>
+                <div id="event-suggestions" class="mt-4">
+                    <!-- Events suggested by LLM will appear here -->
+                </div>
+                <button
+                    id="submit-all-events"
+                    class="btn btn-success mt-3 d-none"
+                >
+                    Submit All Events
+                </button>
+            </div>
+        </div>
+        {% endif %} {% if not user.is_authenticated %} {% comment %} Home page
+        {% endcomment %}
+        <div class="container my-5" data-aos="fade-up" data-aos-delay="300">
+            <div class="row align-items">
+                <!-- Image on the left -->
+                <div class="col-md-6 text-center">
+                    <img
+                        src="{% static 'image/background.jpg' %}"
+                        class="img-fluid rounded shadow"
+                        alt="illustration"
+                        style="max-width: 100%; height: auto"
+                    />
+                </div>
+
+                <!-- Text on the right -->
+                <div class="col-md-6">
+                    <p style="font-size: 1.2rem">
+                        <strong>AI Calendar</strong> makes managing your
+                        schedule smarter and easier. We will make your Google
+                        Calendar better!
+                    </p>
+                    <p style="font-size: 1.2rem">
+                        Just give us something such as a Syllabus, or simply
+                        just input some texts, and we will make it appear on
+                        your calendar. No more manually entering each detail.
+                    </p>
+                </div>
+            </div>
+        </div>
+
         {% endif %}
-
-    {% if user.is_authenticated %}
-    <!-- Chat History and Suggested Events -->
-    <div class="card mt-4 shadow-sm" id="chat-container">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Chat History</h5>
-        </div>
-        <div class="card-body">
-            <div id="chat-history" class="mb-3">
-                <!-- Session queries and file summaries go here -->
-            </div>
-            <div id="event-suggestions" class="mt-4">
-                <!-- Events suggested by LLM will appear here -->
-            </div>
-            <button id="submit-all-events" class="btn btn-success mt-3 d-none">Submit All Events</button>
-        </div>
     </div>
-    {% endif %}
+    {% endblock %} {% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
-    {% if not user.is_authenticated %}
-    {% comment %} Home page {% endcomment %}
-    <div class="container my-5" data-aos="fade-up" data-aos-delay="300">
-        <div class="row align-items">
-            <!-- Image on the left -->
-            <div class="col-md-6 text-center">
-                <img
-                    src="{% static 'image/background.jpg' %}"
-                    class="img-fluid rounded shadow"
-                    alt="illustration"
-                    style="max-width: 100%; height: auto;"
-                />
-            </div>
-
-            <!-- Text on the right -->
-            <div class="col-md-6">
-                <p style="font-size: 1.2rem;">
-                    <strong>AI Calendar</strong> makes managing your schedule smarter and easier. We will make your Google Calendar better!
-                </p>
-                <p style="font-size: 1.2rem;">
-                    Just give us something such as a Syllabus, or simply just input some texts, and we will make it appear on your calendar. No more manually entering each detail.
-                </p>
-            </div>
-        </div>
-    </div>  
-
-    {% endif %}
-
-    </div>
-{% endblock %}
-
-{% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-
-<script>
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
+    <script>
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
                 }
-            }
-        }
-        return cookieValue;
-    }
-    
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log("DOM fully loaded. JS running.");
-        const aiForm = document.getElementById('ai-query-form');
-        const aiResponseBox = document.getElementById('ai-response');
-        document.getElementById("manual-repeat").addEventListener("change", function () {
-            const val = this.value;
-            document.getElementById("manual-weekly-options").classList.toggle("d-none", val !== "WEEKLY");
-            document.getElementById("manual-until-group").classList.toggle("d-none", !val);
-        });
-
-        if (!aiForm) {
-            console.error(" aiForm not found in DOM.");
-            return;
-        }
-
-        aiForm.addEventListener('submit', function (e) {
-            console.log("AI form submit triggered.");
-            e.preventDefault();
-    
-            const query = document.getElementById('ai-input').value.trim();
-            const fileInput = document.getElementById('ai-file').files[0];
-    
-            if (!query && !fileInput) {
-                alert("Please provide a query or upload a file.");
-                return;
-            }
-    
-            const formData = new FormData();
-            formData.append("query", query);
-            if (fileInput) {
-                formData.append("file", fileInput);
+                return cookieValue;
             }
 
-            fetch('/ai-process-query/', {
-                method: 'POST',
-                headers: { 'X-CSRFToken': getCookie('csrftoken') },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert("! " + data.error);
+            document.addEventListener('DOMContentLoaded', function () {
+                console.log("DOM fully loaded. JS running.");
+                const aiForm = document.getElementById('ai-query-form');
+                const aiResponseBox = document.getElementById('ai-response');
+                document.getElementById("manual-repeat").addEventListener("change", function () {
+                    const val = this.value;
+                    document.getElementById("manual-weekly-options").classList.toggle("d-none", val !== "WEEKLY");
+                    document.getElementById("manual-until-group").classList.toggle("d-none", !val);
+                });
+
+                if (!aiForm) {
+                    console.error(" aiForm not found in DOM.");
                     return;
                 }
-    
+
+                aiForm.addEventListener('submit', function (e) {
+                    console.log("AI form submit triggered.");
+                    e.preventDefault();
+
+                    const query = document.getElementById('ai-input').value.trim();
+                    const fileInput = document.getElementById('ai-file').files[0];
+
+                    if (!query && !fileInput) {
+                        alert("Please provide a query or upload a file.");
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append("query", query);
+                    if (fileInput) {
+                        formData.append("file", fileInput);
+                    }
+
+                    fetch('/ai-process-query/', {
+                        method: 'POST',
+                        headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert("! " + data.error);
+                            return;
+                        }
+
+                        fetch('/chat-history/')
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.history) {
+                                    displayChatHistory(data.history);
+                                }
+                                console.log("🛰️ /chat-history/ returned:", data);
+                            });
+
+                        if (data.processing) {
+                            console.log(" Starting pollSuggestedEvents...");
+                            pollSuggestedEvents();
+                        }
+
+                        aiResponseBox.classList.remove('d-none');
+                        aiResponseBox.textContent = "Submitted. Waiting for AI to respond with events...";
+                        document.getElementById('ai-input').value = '';
+                        document.getElementById('ai-file').value = '';
+                    })
+                    .catch(err => {
+                        console.error("Error submitting query:", err);
+                        alert("Error submitting query.");
+                    });
+                });
+
+                const allEvents = [
+                    {% for event in events %}
+                    {
+                        title: "{{ event.summary|escapejs }}",
+                        start: "{{ event.start|escapejs }}",
+                        end: "{{ event.end|escapejs }}",
+                        backgroundColor: "{{ event.backgroundColor|default:'#3788d8' }}",
+                        calendarId: "{{ event.calendarId|escapejs }}",
+                        extendedProps: {
+                            location: "{{ event.location|escapejs }}",
+                            description: "{{ event.description|escapejs }}",
+                            recurrence: {{ event.recurrence|safe|default:"null" }},
+                            creator: "{{ event.creator|escapejs }}",
+                            htmlLink: "{{ event.htmlLink|escapejs }}",
+                            googleEventId: "{{ event.googleEventId|escapejs }}"
+                        }
+                    }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ];
+
+                const calendarEl = document.getElementById('calendar');
+                const checkboxes = document.querySelectorAll('.calendar-toggle');
+                let calendar = null;
+
+                if (calendarEl) {
+                    calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'timeGridWeek',
+                        height: 'auto',
+                        headerToolbar: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'timeGridWeek,dayGridMonth,listWeek'
+                        },
+                        events: allEvents,
+                        eventClick: function (info) {
+                            const props = info.event.extendedProps;
+                            const title = info.event.title;
+                            const start = info.event.start.toLocaleString();
+                            const end = info.event.end ? info.event.end.toLocaleString() : 'N/A';
+                            const location = props.location || 'N/A';
+                            const description = props.description || 'N/A';
+                            const creator = props.creator || 'N/A';
+                            const recurrence = info.event.extendedProps.recurrence || 'N/A';
+
+                            const confirmDelete = confirm(
+                                `Title: ${title}\nStart: ${start}\nEnd: ${end}\nLocation: ${location}\nDescription: ${description}\nRecurrence: ${recurrence}\nCreator: ${creator}\n\nDo you want to delete this event?`
+                            );
+
+                            if (confirmDelete) {
+                                fetch('/delete-event/', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRFToken': getCookie('csrftoken')
+                                    },
+                                    body: JSON.stringify({
+                                        eventId: props.googleEventId,
+                                        calendarId: props.calendarId || "primary"
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.error) {
+                                        alert("! " + data.error);
+                                        return;
+                                    }
+                                    fetch('/chat-history/')
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            if (data.history) {
+                                                displayChatHistory(data.history);
+                                            }
+                                        });
+                                    alert("Event deleted from Google Calendar.");
+                                })
+                                .catch(error => {
+                                    console.error("Delete error:", error);
+                                    alert("Error deleting event.");
+                                });
+                            }
+                        }
+                    });
+                    calendar.render();
+
+                    checkboxes.forEach(cb => {
+                        cb.addEventListener('change', () => {
+                            const selectedCalendars = Array.from(checkboxes)
+                                .filter(c => c.checked)
+                                .map(c => c.value);
+                            const filteredEvents = allEvents.filter(ev => selectedCalendars.includes(ev.calendarId));
+                            calendar.removeAllEvents();
+                            calendar.addEventSource(filteredEvents);
+                        });
+                    });
+                }
+
                 fetch('/chat-history/')
                     .then(res => res.json())
                     .then(data => {
                         if (data.history) {
                             displayChatHistory(data.history);
                         }
-                        console.log("🛰️ /chat-history/ returned:", data);
                     });
-    
-                if (data.processing) {
-                    console.log(" Starting pollSuggestedEvents...");
-                    pollSuggestedEvents();
-                }
-    
-                aiResponseBox.classList.remove('d-none');
-                aiResponseBox.textContent = "Submitted. Waiting for AI to respond with events...";
-                document.getElementById('ai-input').value = '';
-                document.getElementById('ai-file').value = '';
-            })
-            .catch(err => {
-                console.error("Error submitting query:", err);
-                alert("Error submitting query.");
-            });
-        });
-    
-        const allEvents = [
-            {% for event in events %}
-            {
-                title: "{{ event.summary|escapejs }}",
-                start: "{{ event.start|escapejs }}",
-                end: "{{ event.end|escapejs }}",
-                backgroundColor: "{{ event.backgroundColor|default:'#3788d8' }}",
-                calendarId: "{{ event.calendarId|escapejs }}",
-                extendedProps: {
-                    location: "{{ event.location|escapejs }}",
-                    description: "{{ event.description|escapejs }}",
-                    recurrence: {{ event.recurrence|safe|default:"null" }},
-                    creator: "{{ event.creator|escapejs }}",
-                    htmlLink: "{{ event.htmlLink|escapejs }}",
-                    googleEventId: "{{ event.googleEventId|escapejs }}"
-                }
-            }{% if not forloop.last %},{% endif %}
-            {% endfor %}
-        ];
-    
-        const calendarEl = document.getElementById('calendar');
-        const checkboxes = document.querySelectorAll('.calendar-toggle');
-        let calendar = null;
-    
-        if (calendarEl) {
-            calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'timeGridWeek',
-                height: 'auto',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'timeGridWeek,dayGridMonth,listWeek'
-                },
-                events: allEvents,
-                eventClick: function (info) {
-                    const props = info.event.extendedProps;
-                    const title = info.event.title;
-                    const start = info.event.start.toLocaleString();
-                    const end = info.event.end ? info.event.end.toLocaleString() : 'N/A';
-                    const location = props.location || 'N/A';
-                    const description = props.description || 'N/A';
-                    const creator = props.creator || 'N/A';
-                    const recurrence = info.event.extendedProps.recurrence || 'N/A';
 
-                    const confirmDelete = confirm(
-                        `Title: ${title}\nStart: ${start}\nEnd: ${end}\nLocation: ${location}\nDescription: ${description}\nRecurrence: ${recurrence}\nCreator: ${creator}\n\nDo you want to delete this event?`
-                    );
-    
-                    if (confirmDelete) {
-                        fetch('/delete-event/', {
+                fetch('/suggested-events/')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.suggested_events) {
+                            displaySuggestedEvents(data.suggested_events);
+                        }
+                    });
+
+                document.getElementById('add-event-toggle').addEventListener('click', function () {
+                    document.getElementById('manual-event-form').classList.toggle('d-none');
+                });
+
+                const manualForm = document.getElementById('manual-event-form');
+                if (manualForm) {
+                    manualForm.addEventListener('submit', function (e) {
+                        e.preventDefault();
+
+                        const title = document.getElementById('manual-title').value;
+                        const startRaw = document.getElementById('manual-start').value;
+                        const endRaw = document.getElementById('manual-end').value;
+                        const location = document.getElementById('manual-location').value;
+                        const description = document.getElementById('manual-description').value;
+
+                        function toRFC3339(datetime) {
+                            return new Date(datetime).toISOString();
+                        }
+
+                        const start = toRFC3339(startRaw);
+                        const end = toRFC3339(endRaw);
+
+                        if (new Date(start) >= new Date(end)) {
+                            alert("End time must be after start time.");
+                            return;
+                        }
+
+
+                        const repeat = document.getElementById("manual-repeat").value;
+                        let recurrence = "";
+
+                        if (repeat) {
+                            let rrule = `RRULE:FREQ=${repeat}`;
+
+                            if (repeat === "WEEKLY") {
+                                const byday = Array.from(document.querySelectorAll('#manual-weekly-options input:checked'))
+                                    .map(cb => cb.value)
+                                    .join(",");
+                                if (byday) rrule += `;BYDAY=${byday}`;
+                            }
+
+                            const untilDate = document.getElementById("manual-until").value;
+                            if (untilDate) {
+                                const until = new Date(untilDate + "T23:59:59Z").toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+                                rrule += `;UNTIL=${until}`;
+                            }
+
+                            recurrence = rrule;
+                        }
+
+                        fetch('/add-event/', {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json',
+                                'Content-Type': 'application/x-www-form-urlencoded',
                                 'X-CSRFToken': getCookie('csrftoken')
                             },
-                            body: JSON.stringify({
-                                eventId: props.googleEventId,
-                                calendarId: props.calendarId || "primary"
+                            body: new URLSearchParams({
+                                title,
+                                start,
+                                end,
+                                location,
+                                description,
+                                recurrence
                             })
                         })
-                        .then(response => response.json())
+                        .then(res => res.json())
                         .then(data => {
-                            if (data.error) {
-                                alert("! " + data.error);
-                                return;
+                            if (data.message) {
+                                alert("Event added to Google Calendar!");
+                                manualForm.classList.add('d-none');
+                                manualForm.reset();
+                                setTimeout(() => location.reload(), 1000);
+                            } else {
+                                alert("! " + (data.error || "Failed to add event."));
                             }
-                            fetch('/chat-history/')
-                                .then(res => res.json())
-                                .then(data => {
-                                    if (data.history) {
-                                        displayChatHistory(data.history);
-                                    }
-                                });
-                            alert("Event deleted from Google Calendar.");
                         })
-                        .catch(error => {
-                            console.error("Delete error:", error);
-                            alert("Error deleting event.");
+                        .catch(err => {
+                            console.error("Network error adding event:", err);
+                            alert("Submission failed.");
+                        });
+                    });
+                }
+            });
+
+            function displayChatHistory(history) {
+                console.log("Rendering chat history:", history);
+                const container = document.getElementById("chat-history");
+                container.innerHTML = "";
+                history.forEach((entry, index) => {
+                    const card = document.createElement("div");
+                    card.className = "card mb-2 shadow-sm";
+                    card.innerHTML = `
+                        <div class="card-body">
+                            <h6>Query ${index + 1}:</h6>
+                            <p><strong>Input:</strong> ${entry.query || "<em>None</em>"}</p>
+                            ${entry.file_text ? `<p><strong>PDF Preview:</strong><br><small>${entry.file_text.substring(0, 300)}...</small></p>` : ""}
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            function parseRRULE(rruleStr) {
+            if (!rruleStr || !rruleStr.startsWith("RRULE:")) return {};
+            const parts = rruleStr.substring(6).split(";");
+            const rule = {};
+            parts.forEach(part => {
+                const [key, val] = part.split("=");
+                rule[key] = val;
+            });
+            return rule;
+        }
+
+
+            function displaySuggestedEvents(events) {
+                console.log("displaySuggestedEvents called with:", events);
+                const container = document.getElementById('event-suggestions');
+                container.innerHTML = '';
+                if (!events || events.length === 0) {
+                    container.innerHTML = "<p class='text-muted'>No event suggestions available.</p>";
+                    return;
+                }
+
+                const isAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
+
+                events.forEach((event, idx) => {
+                    const div = document.createElement('div');
+                    div.className = "card mb-2 shadow-sm";
+                    const safe = (field) => (event[field] !== undefined ? event[field] : '');
+
+                    const rrule = parseRRULE(event.recurrence)
+
+                    div.innerHTML = `
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <label>Title:</label>
+                                <input type="text" class="form-control form-control-sm" id="title-${idx}" value="${safe("title")}">
+                            </div>
+                            <div class="mb-2">
+                                <label>Start:</label>
+                                <input type="datetime-local" class="form-control form-control-sm" id="start-${idx}" value="${safe("start")}">
+                            </div>
+                            <div class="mb-2">
+                                <label>End:</label>
+                                <input type="datetime-local" class="form-control form-control-sm" id="end-${idx}" value="${safe("end")}">
+                            </div>
+                            <div class="mb-2">
+                                <label>Location:</label>
+                                <input type="text" class="form-control form-control-sm" id="location-${idx}" value="${safe("location")}">
+                            </div>
+                            <div class="mb-2">
+                                <label>Description:</label>
+                                <input type="text" class="form-control form-control-sm" id="description-${idx}" value="${safe("description")}">
+                            </div>
+                            <div class="mb-2">
+                                <label>Repeat:</label>
+                                <select class="form-select form-select-sm" id="edit-repeat-${idx}">
+                                    <option value="">None</option>
+                                    <option value="DAILY">Daily</option>
+                                    <option value="WEEKLY">Weekly</option>
+                                    <option value="MONTHLY">Monthly</option>
+                                </select>
+                            </div>
+                            <div class="mb-2 d-none" id="edit-weekly-options-${idx}">
+                                <label>Repeat on:</label>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <label><input type="checkbox" value="MO"> Mon</label>
+                                    <label><input type="checkbox" value="TU"> Tue</label>
+                                    <label><input type="checkbox" value="WE"> Wed</label>
+                                    <label><input type="checkbox" value="TH"> Thu</label>
+                                    <label><input type="checkbox" value="FR"> Fri</label>
+                                    <label><input type="checkbox" value="SA"> Sat</label>
+                                    <label><input type="checkbox" value="SU"> Sun</label>
+                                </div>
+                            </div>
+                            <div class="mb-2 d-none" id="edit-until-group-${idx}">
+                                <label>Until (end date):</label>
+                                <input type="date" class="form-control form-control-sm" id="edit-until-${idx}">
+                            </div>
+                            <button class="btn btn-sm btn-primary" onclick="submitEditedEvent(${idx})">Submit</button>
+                        </div>
+                    `;
+
+
+                    // Attach onchange handler to recurrence select
+                    const repeatSelect = div.querySelector(`#edit-repeat-${idx}`);
+                    const weeklySelect = div.querySelector(`#edit-weekly-options-${idx}`);
+                    const untilGroup = div.querySelector(`#edit-until-group-${idx}`);
+                    const untilInput = div.querySelector(`#edit-until-${idx}`);
+
+                    repeatSelect?.addEventListener("change", function () {
+                        const isWeekly = this.value === "WEEKLY";
+                        if (weeklySelect) weeklySelect.classList.toggle("d-none", !isWeekly);
+                        if (untilGroup) untilGroup.classList.toggle("d-none", !this.value);
+                    });
+
+                    if (rrule.FREQ) {
+                        repeatSelect.value = rrule.FREQ;
+                        repeatSelect.dispatchEvent(new Event('change'));
+                    }
+
+                    // Pre-select weekly BYDAY options
+                    if (rrule.FREQ === "WEEKLY" && rrule.BYDAY) {
+                        const selectedDays = rrule.BYDAY.split(",");
+                        selectedDays.forEach(day => {
+                            const checkbox = weeklySelect.querySelector(`input[value="${day}"]`);
+                            if (checkbox) checkbox.checked = true;
                         });
                     }
-                }
-            });
-            calendar.render();
-    
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', () => {
-                    const selectedCalendars = Array.from(checkboxes)
-                        .filter(c => c.checked)
-                        .map(c => c.value);
-                    const filteredEvents = allEvents.filter(ev => selectedCalendars.includes(ev.calendarId));
-                    calendar.removeAllEvents();
-                    calendar.addEventSource(filteredEvents);
+
+                    // if there is until date suggestion or if user choose an end day, update visual
+                    if (rrule.UNTIL && untilInput) {
+                        if (rrule.UNTIL) {
+                            const untilDate = new Date(
+                                rrule.UNTIL.substring(0, 4) + "-" +
+                                rrule.UNTIL.substring(4, 6) + "-" +
+                                rrule.UNTIL.substring(6, 8)
+                            ).toISOString().split("T")[0];
+                            untilInput.value = untilDate;
+                        }
+                        untilInput?.classList.remove("d-none");
+                    }
+
+                    container.appendChild(div);
                 });
-            });
-        }
-    
-        fetch('/chat-history/')
-            .then(res => res.json())
-            .then(data => {
-                if (data.history) {
-                    displayChatHistory(data.history);
+            }
+
+            function pollSuggestedEvents() {
+                console.log("pollSuggestedEvents() called");
+                const pollInterval = setInterval(() => {
+                    fetch('/poll-llm-status/')
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log("Poll response:", data);
+                            if (!data.processing) {
+                                clearInterval(pollInterval);
+                                displaySuggestedEvents(data.suggested_events);
+                                document.getElementById("ai-response").textContent = "New events received!";
+                            } else {
+                                console.log("LLM still generating...");
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Polling error:", err);
+                        });
+                }, 1500);
+            }
+
+            function submitEditedEvent(idx) {
+                const title = document.getElementById(`title-${idx}`).value;
+                const start = document.getElementById(`start-${idx}`).value;
+                const end = document.getElementById(`end-${idx}`).value;
+                const location = document.getElementById(`location-${idx}`).value;
+                const description = document.getElementById(`description-${idx}`).value;
+                const repeat = document.getElementById(`edit-repeat-${idx}`).value;
+
+                let recurrence = "";
+
+                if (repeat) {
+                    let rrule = `RRULE:FREQ=${repeat}`;
+
+                    if (repeat === "WEEKLY") {
+                    const byday = Array.from(document.querySelectorAll(`#edit-weekly-options-${idx} input:checked`))
+                        .map(cb => cb.value)
+                        .join(",");
+                    if (byday) rrule += `;BYDAY=${byday}`;
+                    }
+
+                    const untilDate = document.getElementById(`edit-until-${idx}`).value;
+                    if (untilDate) {
+                    const until = new Date(untilDate + "T23:59:59Z").toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+                    rrule += `;UNTIL=${until}`;
+                    }
+
+                    recurrence = rrule;
                 }
-            });
-    
-        fetch('/suggested-events/')
-            .then(res => res.json())
-            .then(data => {
-                if (data.suggested_events) {
-                    displaySuggestedEvents(data.suggested_events);
+
+                if (!title || !start || !end) {
+                    alert("Missing required fields.");
+                    return;
                 }
-            });
-    
-        document.getElementById('add-event-toggle').addEventListener('click', function () {
-            document.getElementById('manual-event-form').classList.toggle('d-none');
-        });
-    
-        const manualForm = document.getElementById('manual-event-form');
-        if (manualForm) {
-            manualForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-    
-                const title = document.getElementById('manual-title').value;
-                const startRaw = document.getElementById('manual-start').value;
-                const endRaw = document.getElementById('manual-end').value;
-                const location = document.getElementById('manual-location').value;
-                const description = document.getElementById('manual-description').value;
-    
-                function toRFC3339(datetime) {
-                    return new Date(datetime).toISOString();
-                }
-    
-                const start = toRFC3339(startRaw);
-                const end = toRFC3339(endRaw);
-    
+
                 if (new Date(start) >= new Date(end)) {
                     alert("End time must be after start time.");
                     return;
                 }
 
-
-                const repeat = document.getElementById("manual-repeat").value;
-                let recurrence = "";
-                
-                if (repeat) {
-                    let rrule = `RRULE:FREQ=${repeat}`;
-                    
-                    if (repeat === "WEEKLY") {
-                        const byday = Array.from(document.querySelectorAll('#manual-weekly-options input:checked'))
-                            .map(cb => cb.value)
-                            .join(",");
-                        if (byday) rrule += `;BYDAY=${byday}`;
-                    }
-                
-                    const untilDate = document.getElementById("manual-until").value;
-                    if (untilDate) {
-                        const until = new Date(untilDate + "T23:59:59Z").toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-                        rrule += `;UNTIL=${until}`;
-                    }
-                
-                    recurrence = rrule;
-                }
-    
                 fetch('/add-event/', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'X-CSRFToken': getCookie('csrftoken')
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
                     },
                     body: new URLSearchParams({
-                        title,
-                        start,
-                        end,
-                        location,
-                        description,
-                        recurrence
+                    title,
+                    start: new Date(start).toISOString(),
+                    end: new Date(end).toISOString(),
+                    location,
+                    description,
+                    recurrence
                     })
                 })
                 .then(res => res.json())
                 .then(data => {
                     if (data.message) {
-                        alert("Event added to Google Calendar!");
-                        manualForm.classList.add('d-none');
-                        manualForm.reset();
-                        setTimeout(() => location.reload(), 1000);
+                    alert("Event submitted!");
                     } else {
-                        alert("! " + (data.error || "Failed to add event."));
+                    alert("ERROR" + (data.error || "Submission failed."));
                     }
                 })
                 .catch(err => {
-                    console.error("Network error adding event:", err);
+                    console.error("Error submitting event:", err);
                     alert("Submission failed.");
                 });
-            });
-        }
-    });
-    
-    function displayChatHistory(history) {
-        console.log("Rendering chat history:", history);
-        const container = document.getElementById("chat-history");
-        container.innerHTML = "";
-        history.forEach((entry, index) => {
-            const card = document.createElement("div");
-            card.className = "card mb-2 shadow-sm";
-            card.innerHTML = `
-                <div class="card-body">
-                    <h6>Query ${index + 1}:</h6>
-                    <p><strong>Input:</strong> ${entry.query || "<em>None</em>"}</p>
-                    ${entry.file_text ? `<p><strong>PDF Preview:</strong><br><small>${entry.file_text.substring(0, 300)}...</small></p>` : ""}
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function parseRRULE(rruleStr) {
-    if (!rruleStr || !rruleStr.startsWith("RRULE:")) return {};
-    const parts = rruleStr.substring(6).split(";");
-    const rule = {};
-    parts.forEach(part => {
-        const [key, val] = part.split("=");
-        rule[key] = val;
-    });
-    return rule;
-}
-
-    
-    function displaySuggestedEvents(events) {
-        console.log("displaySuggestedEvents called with:", events);
-        const container = document.getElementById('event-suggestions');
-        container.innerHTML = '';
-        if (!events || events.length === 0) {
-            container.innerHTML = "<p class='text-muted'>No event suggestions available.</p>";
-            return;
-        }
-
-        const isAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
-    
-        events.forEach((event, idx) => {
-            const div = document.createElement('div');
-            div.className = "card mb-2 shadow-sm";
-            const safe = (field) => (event[field] !== undefined ? event[field] : '');
-
-            const rrule = parseRRULE(event.recurrence)
-
-            div.innerHTML = `
-                <div class="card-body">
-                    <div class="mb-2">
-                        <label>Title:</label>
-                        <input type="text" class="form-control form-control-sm" id="title-${idx}" value="${safe("title")}">
-                    </div>
-                    <div class="mb-2">
-                        <label>Start:</label>
-                        <input type="datetime-local" class="form-control form-control-sm" id="start-${idx}" value="${safe("start")}">
-                    </div>
-                    <div class="mb-2">
-                        <label>End:</label>
-                        <input type="datetime-local" class="form-control form-control-sm" id="end-${idx}" value="${safe("end")}">
-                    </div>
-                    <div class="mb-2">
-                        <label>Location:</label>
-                        <input type="text" class="form-control form-control-sm" id="location-${idx}" value="${safe("location")}">
-                    </div>
-                    <div class="mb-2">
-                        <label>Description:</label>
-                        <input type="text" class="form-control form-control-sm" id="description-${idx}" value="${safe("description")}">
-                    </div>
-                    <div class="mb-2">
-                        <label>Repeat:</label>
-                        <select class="form-select form-select-sm" id="edit-repeat-${idx}">
-                            <option value="">None</option>
-                            <option value="DAILY">Daily</option>
-                            <option value="WEEKLY">Weekly</option>
-                            <option value="MONTHLY">Monthly</option>
-                        </select>
-                    </div>
-                    <div class="mb-2 d-none" id="edit-weekly-options-${idx}">
-                        <label>Repeat on:</label>
-                        <div class="d-flex flex-wrap gap-2">
-                            <label><input type="checkbox" value="MO"> Mon</label>
-                            <label><input type="checkbox" value="TU"> Tue</label>
-                            <label><input type="checkbox" value="WE"> Wed</label>
-                            <label><input type="checkbox" value="TH"> Thu</label>
-                            <label><input type="checkbox" value="FR"> Fri</label>
-                            <label><input type="checkbox" value="SA"> Sat</label>
-                            <label><input type="checkbox" value="SU"> Sun</label>
-                        </div>
-                    </div>
-                    <div class="mb-2 d-none" id="edit-until-group-${idx}">
-                        <label>Until (end date):</label>
-                        <input type="date" class="form-control form-control-sm" id="edit-until-${idx}">
-                    </div>
-                    <button class="btn btn-sm btn-primary" onclick="submitEditedEvent(${idx})">Submit</button>
-                </div>
-            `;
-
-
-            // Attach onchange handler to recurrence select
-            const repeatSelect = div.querySelector(`#edit-repeat-${idx}`);
-            const weeklySelect = div.querySelector(`#edit-weekly-options-${idx}`);
-            const untilGroup = div.querySelector(`#edit-until-group-${idx}`);
-            const untilInput = div.querySelector(`#edit-until-${idx}`);
-
-            repeatSelect?.addEventListener("change", function () {
-                const isWeekly = this.value === "WEEKLY";
-                if (weeklySelect) weeklySelect.classList.toggle("d-none", !isWeekly);
-                if (untilGroup) untilGroup.classList.toggle("d-none", !this.value);
-            });
-
-            if (rrule.FREQ) {
-                repeatSelect.value = rrule.FREQ;
-                repeatSelect.dispatchEvent(new Event('change'));
-            }
-
-            // Pre-select weekly BYDAY options
-            if (rrule.FREQ === "WEEKLY" && rrule.BYDAY) {
-                const selectedDays = rrule.BYDAY.split(",");
-                selectedDays.forEach(day => {
-                    const checkbox = weeklySelect.querySelector(`input[value="${day}"]`);
-                    if (checkbox) checkbox.checked = true;
-                });
-            }
-
-            // if there is until date suggestion or if user choose an end day, update visual
-            if (rrule.UNTIL && untilInput) {
-                if (rrule.UNTIL) {
-                    const untilDate = new Date(
-                        rrule.UNTIL.substring(0, 4) + "-" +
-                        rrule.UNTIL.substring(4, 6) + "-" +
-                        rrule.UNTIL.substring(6, 8)
-                    ).toISOString().split("T")[0];
-                    untilInput.value = untilDate;
                 }
-                untilInput?.classList.remove("d-none");
-            }
-
-            container.appendChild(div);
-        });
-    }
-    
-    function pollSuggestedEvents() {
-        console.log("pollSuggestedEvents() called");
-        const pollInterval = setInterval(() => {
-            fetch('/poll-llm-status/')
-                .then(res => res.json())
-                .then(data => {
-                    console.log("Poll response:", data);
-                    if (!data.processing) {
-                        clearInterval(pollInterval);
-                        displaySuggestedEvents(data.suggested_events);
-                        document.getElementById("ai-response").textContent = "New events received!";
-                    } else {
-                        console.log("LLM still generating...");
-                    }
-                })
-                .catch(err => {
-                    console.error("Polling error:", err);
-                });
-        }, 1500);
-    }
-
-    function submitEditedEvent(idx) {
-        const title = document.getElementById(`title-${idx}`).value;
-        const start = document.getElementById(`start-${idx}`).value;
-        const end = document.getElementById(`end-${idx}`).value;
-        const location = document.getElementById(`location-${idx}`).value;
-        const description = document.getElementById(`description-${idx}`).value;
-        const repeat = document.getElementById(`edit-repeat-${idx}`).value;
-
-        let recurrence = "";
-        
-        if (repeat) {
-            let rrule = `RRULE:FREQ=${repeat}`;
-        
-            if (repeat === "WEEKLY") {
-            const byday = Array.from(document.querySelectorAll(`#edit-weekly-options-${idx} input:checked`))
-                .map(cb => cb.value)
-                .join(",");
-            if (byday) rrule += `;BYDAY=${byday}`;
-            }
-        
-            const untilDate = document.getElementById(`edit-until-${idx}`).value;
-            if (untilDate) {
-            const until = new Date(untilDate + "T23:59:59Z").toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-            rrule += `;UNTIL=${until}`;
-            }
-        
-            recurrence = rrule;
-        }
-
-        if (!title || !start || !end) {
-            alert("Missing required fields.");
-            return;
-        }
-
-        if (new Date(start) >= new Date(end)) {
-            alert("End time must be after start time.");
-            return;
-        }
-
-        fetch('/add-event/', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: new URLSearchParams({
-            title,
-            start: new Date(start).toISOString(),
-            end: new Date(end).toISOString(),
-            location,
-            description,
-            recurrence
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.message) {
-            alert("Event submitted!");
-            } else {
-            alert("ERROR" + (data.error || "Submission failed."));
-            }
-        })
-        .catch(err => {
-            console.error("Error submitting event:", err);
-            alert("Submission failed.");
-        });
-        }
-
     </script>
-{% endblock %}
+    {% endblock %}
+</div>
