@@ -141,7 +141,7 @@ def index(request):
         try:
             print("Checking Google account and tokens for:", request.user.email)
             token = SocialToken.objects.get(account__user=request.user, account__provider='google')
-
+            
             credentials = Credentials(
                 token=token.token,
                 refresh_token=token.token_secret,
@@ -198,6 +198,9 @@ def index(request):
         'calendars': all_calendars,
         'chat_history': request.session.get("chat_history", [])
     })
+    
+def privacy(request):
+    return render(request, "privacy.html")
 
 @csrf_exempt
 @require_POST

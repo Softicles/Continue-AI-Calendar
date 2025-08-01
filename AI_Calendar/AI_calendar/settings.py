@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
 import logging
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qsl
@@ -121,12 +120,6 @@ WSGI_APPLICATION = "AI_calendar.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# Add these at the top of your settings.py
-import os
-from dotenv import load_dotenv
-from urllib.parse import urlparse, parse_qsl
-
-load_dotenv()
 
 # Replace the DATABASES section of your settings.py with this
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
@@ -142,7 +135,6 @@ DATABASES = {
         'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -161,6 +153,8 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+# For manually control the saving of account tokens
+SOCIALACCOUNT_ADAPTER = "home.adapters.CustomSocialAccountAdapter"
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -176,8 +170,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-SOCIALACCOUNT_STORE_TOKENS = True
 
+SOCIALACCOUNT_STORE_TOKENS = True
 
 
 # Internationalization
@@ -211,4 +205,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Add to your settings.py temporarily
 print("Client ID:", GOOGLE_CLIENT_ID)
 print("Client Secret:", GOOGLE_CLIENT_SECRET)
-

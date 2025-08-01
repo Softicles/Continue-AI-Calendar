@@ -10,4 +10,5 @@ urlpatterns = [
     path('chat-history/', views.get_chat_history, name='chat_history'),
     path('suggested-events/', views.get_event_suggestions, name='get_event_suggestions'),
     path('poll-llm-status/', views.poll_llm_status, name='poll_llm_status'),
+    path("privacy/", views.privacy, name="privacy"),
 ]
