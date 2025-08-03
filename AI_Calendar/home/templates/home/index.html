@@ -27,7 +27,7 @@
         <div class="col-md-3">
             {% if user.is_authenticated and calendars %}
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-secondary text-white">
                     <h5 class="mb-0">My Calendars</h5>
                 </div>
                 <div class="card-body">
@@ -157,49 +157,47 @@
                         </div>
                         <button
                             type="submit"
-                            class="btn btn-sm btn-success w-100"
+                            class="btn btn-sm btn-secondary w-100"
                         >
                             Save
                         </button>
                     </form>
                     <!-- AI Calendar Query Form -->
                     <div class="card mt-4 shadow-sm">
-                        <div class="card-body">
-                            <form id="ai-query-form">
-                                <div class="mb-3">
-                                    <label for="ai-input" class="form-label"
-                                        >AI Calendar Query:</label
-                                    >
-                                    <textarea
-                                        id="ai-input"
-                                        class="form-control form-control-sm"
-                                        rows="3"
-                                        placeholder="e.g., Meeting next Tuesday..."
-                                    ></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="ai-file" class="form-label"
-                                        >PDF Upload</label
-                                    >
-                                    <input
-                                        type="file"
-                                        class="form-control form-control-sm"
-                                        id="ai-file"
-                                        name="file"
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    class="btn btn-sm btn-primary w-100"
+                        <form id="ai-query-form">
+                            <div class="mb-3">
+                                <label for="ai-input" class="form-label"
+                                    >AI Calendar Query:</label
                                 >
-                                    Submit Query
-                                </button>
-                            </form>
-                            <div
-                                id="ai-response"
-                                class="mt-2 d-none alert alert-secondary"
-                            ></div>
-                        </div>
+                                <textarea
+                                    id="ai-input"
+                                    class="form-control form-control-sm"
+                                    rows="3"
+                                    placeholder="e.g., Meeting next Tuesday..."
+                                ></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ai-file" class="form-label"
+                                    >PDF Upload</label
+                                >
+                                <input
+                                    type="file"
+                                    class="form-control form-control-sm"
+                                    id="ai-file"
+                                    name="file"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                class="btn btn-sm btn-primary w-100"
+                            >
+                                Submit Query
+                            </button>
+                        </form>
+                        <div
+                            id="ai-response"
+                            class="mt-2 d-none alert alert-secondary"
+                        ></div>
                     </div>
                 </div>
             </div>
@@ -212,7 +210,7 @@
             class="{% if user.is_authenticated and calendars %}col-md-9{% else %}col-12{% endif %}"
         >
             <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-secondary text-white">
                     <h5 class="mb-0">My Schedule</h5>
                 </div>
                 <div class="card-body">
@@ -222,24 +220,16 @@
         </div>
         {% endif %} {% if user.is_authenticated %}
         <!-- Chat History and Suggested Events -->
-        <div class="card mt-4 shadow-sm" id="chat-container">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Chat History</h5>
+        <div class="card-body mt-5">
+            <div id="chat-history" class="mb-3">
+                <!-- Session queries and file summaries go here -->
             </div>
-            <div class="card-body">
-                <div id="chat-history" class="mb-3">
-                    <!-- Session queries and file summaries go here -->
-                </div>
-                <div id="event-suggestions" class="mt-4">
-                    <!-- Events suggested by LLM will appear here -->
-                </div>
-                <button
-                    id="submit-all-events"
-                    class="btn btn-success mt-3 d-none"
-                >
-                    Submit All Events
-                </button>
+            <div id="event-suggestions" class="mt-4">
+                <!-- Events suggested by LLM will appear here -->
             </div>
+            <button id="submit-all-events" class="btn btn-success mt-3 d-none">
+                Submit All Events
+            </button>
         </div>
         {% endif %} {% if not user.is_authenticated %} {% comment %} Home page
         {% endcomment %}
