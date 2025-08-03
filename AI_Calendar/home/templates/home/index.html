@@ -8,7 +8,7 @@
 {% endblock %} {% block content %}
 <div class="container mt-5 text-center">
     <h1>Welcome to AI Calendar</h1>
-    <p>Your AI-powered scheduling assistant</p>
+    <p>Your smart scheduling assistant</p>
 </div>
 
 {% comment %}
@@ -52,7 +52,7 @@
                         id="add-event-toggle"
                         class="btn btn-outline-primary btn-sm mt-3 w-100"
                     >
-                        + Add Event
+                        + Custom Event
                     </button>
                     <form
                         id="manual-event-form"
@@ -167,7 +167,7 @@
                         <form id="ai-query-form">
                             <div class="mb-3">
                                 <label for="ai-input" class="form-label"
-                                    >AI Calendar Query:</label
+                                    >Query:</label
                                 >
                                 <textarea
                                     id="ai-input"
@@ -178,7 +178,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="ai-file" class="form-label"
-                                    >PDF Upload</label
+                                    >Upload PDF</label
                                 >
                                 <input
                                     type="file"
@@ -191,7 +191,7 @@
                                 type="submit"
                                 class="btn btn-sm btn-primary w-100"
                             >
-                                Submit Query
+                                Submit
                             </button>
                         </form>
                         <div
@@ -342,7 +342,7 @@
                         }
 
                         aiResponseBox.classList.remove('d-none');
-                        aiResponseBox.textContent = "Submitted. Waiting for AI to respond with events...";
+                        aiResponseBox.textContent = "AI is processing your input, and it may take a while...";
                         document.getElementById('ai-input').value = '';
                         document.getElementById('ai-file').value = '';
                     })
@@ -640,7 +640,7 @@
                                 </div>
                             </div>
                             <div class="mb-2 d-none" id="edit-until-group-${idx}">
-                                <label>Until (end date):</label>
+                                <label>Until:</label>
                                 <input type="date" class="form-control form-control-sm" id="edit-until-${idx}">
                             </div>
                             <button class="btn btn-sm btn-primary" onclick="submitEditedEvent(${idx})">Submit</button>
@@ -701,7 +701,7 @@
                             if (!data.processing) {
                                 clearInterval(pollInterval);
                                 displaySuggestedEvents(data.suggested_events);
-                                document.getElementById("ai-response").textContent = "New events received!";
+                                document.getElementById("ai-response").textContent = "Done!";
                             } else {
                                 console.log("LLM still generating...");
                             }
