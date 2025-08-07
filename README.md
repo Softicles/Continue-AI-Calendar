@@ -10,4 +10,3 @@ This project was originally my idea as a final project for the class **CS 2340 -
 
 - Web framework: **Django**
 - AI Model: **ChatGPT 4o/4o-mini**
-- Frontend: **HTML**
