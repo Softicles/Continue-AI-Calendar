@@ -233,10 +233,15 @@
         </div>
         {% endif %} {% if not user.is_authenticated %} {% comment %} Home page
         {% endcomment %}
-        <div class="container my-5" data-aos="fade-up" data-aos-delay="300">
-            <div class="row align-items">
-                <!-- Image on the left -->
-                <div class="col-md-6 text-center">
+        <div
+            class="container text-center"
+            data-aos="fade-up"
+            data-aos-delay="300"
+        >
+            <div class="row align-items-start">
+                <div class="col"></div>
+
+                <div class="col">
                     <img
                         src="{% static 'image/background.jpg' %}"
                         class="img-fluid rounded shadow"
@@ -244,20 +249,27 @@
                         style="max-width: 100%; height: auto"
                     />
                 </div>
+                <div class="col"></div>
+            </div>
+        </div>
 
-                <!-- Text on the right -->
-                <div class="col-md-6">
-                    <p style="font-size: 1.2rem">
-                        <strong>AI Calendar</strong> makes managing your
-                        schedule smarter and easier. We will make your Google
-                        Calendar better!
-                    </p>
-                    <p style="font-size: 1.2rem">
-                        Just give us something such as a Syllabus, or simply
-                        just input some texts, and we will make it appear on
-                        your calendar. No more manually entering each detail.
-                    </p>
-                </div>
+        <div
+            class="container text-center"
+            data-aos="fade-up"
+            data-aos-delay="300"
+        >
+            <div class="mt-5 text-center">
+                <p
+                    style="
+                        margin-left: 200px;
+                        margin-right: 200px;
+                        font-size: 1.2rem;
+                    "
+                >
+                    Just give us something such as a Syllabus, or simply just
+                    input some texts, and we will make it appear on your
+                    calendar. No more manually entering each detail.
+                </p>
             </div>
         </div>
 
