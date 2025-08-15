@@ -11,3 +11,5 @@ Project Website: [**aicalendar.art**](https://www.aicalendar.art/)
 Web framework: **Django** 
 
 AI Model: **ChatGPT 4o/4o-mini**
+
+Database: **Neon PostgreSQL**
