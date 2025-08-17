@@ -17,8 +17,8 @@ AI-Calendar is my idea for the final project of **CS 2340 - Objects and Design**
 
 ## Utilities for this project
 
-Web framework: **Django** 
+- Web framework: **Django** 
 
-AI Model: **ChatGPT 4o/4o-mini**
+- AI Model: **ChatGPT 4o/4o-mini**
 
-Database: **Neon PostgreSQL**
+- Database: **Neon PostgreSQL**
