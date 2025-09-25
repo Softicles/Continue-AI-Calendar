@@ -1,10 +1,6 @@
 {% extends "base.html" %} {% load static %} {% load i18n %} {% block title%}Home
 | AI Calendar{% endblock title %} {% block extra_css %}
-<link
-    href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css"
-    rel="stylesheet"
-/>
-<link rel="stylesheet" href="{% static 'styles.css' %}" />
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 {% endblock %} {% block content %}
 <div class="container mt-5 text-center">
     <h1>Welcome to AI Calendar</h1>
@@ -238,18 +234,14 @@
             data-aos="fade-up"
             data-aos-delay="300"
         >
-            <div class="row align-items-start">
-                <div class="col"></div>
-
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
                     <img
                         src="{% static 'image/background.jpg' %}"
                         class="img-fluid rounded shadow"
                         alt="illustration"
-                        style="max-width: 100%; height: auto"
                     />
                 </div>
-                <div class="col"></div>
             </div>
         </div>
 
@@ -259,13 +251,7 @@
             data-aos-delay="300"
         >
             <div class="mt-5 text-center">
-                <p
-                    style="
-                        margin-left: 200px;
-                        margin-right: 200px;
-                        font-size: 1.2rem;
-                    "
-                >
+                <p class="mx-0 mx-md-5 mx-lg-5 fs-6 fs-md-5 fs-lg-5">
                     Just give me something such as a Syllabus, or simply just
                     input some texts, and I will make it appear on your
                     calendar.
@@ -298,14 +284,18 @@
                 console.log("DOM fully loaded. JS running.");
                 const aiForm = document.getElementById('ai-query-form');
                 const aiResponseBox = document.getElementById('ai-response');
-                document.getElementById("manual-repeat").addEventListener("change", function () {
-                    const val = this.value;
-                    document.getElementById("manual-weekly-options").classList.toggle("d-none", val !== "WEEKLY");
-                    document.getElementById("manual-until-group").classList.toggle("d-none", !val);
-                });
+
+                const manualRepeat = document.getElementById("manual-repeat")
+                if (manualRepeat) {
+                    manualRepeat.addEventListener("change", function () {
+                        const val = this.value;
+                        document.getElementById("manual-weekly-options").classList.toggle("d-none", val !== "WEEKLY");
+                        document.getElementById("manual-until-group").classList.toggle("d-none", !val);
+                    });
+                }
 
                 if (!aiForm) {
-                    console.error(" aiForm not found in DOM.");
+
                     return;
                 }
 
